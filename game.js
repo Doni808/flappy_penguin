@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');
 
 // Загружаем изображение птички
 const birdImg = new Image();
-birdImg.src = "images/bird.png"; // Убедитесь, что путь к bird.png правильный
+birdImg.src = "bird.png"; // Убедитесь, что путь к bird.png правильный
 
 // Начальные параметры игры
 let birdX = 25; // Координата X птички
