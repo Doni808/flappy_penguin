@@ -6,6 +6,15 @@ const ctx = canvas.getContext('2d');
 const birdImg = new Image();
 birdImg.src = "bird.png"; // Убедитесь, что путь к bird.png правильный
 
+birdImg.onload = () => {
+  console.log("Изображение птички успешно загружено");
+  draw(); // Запускаем игру только после загрузки изображения
+};
+
+birdImg.onerror = () => {
+  console.error("Ошибка загрузки изображения птички");
+};
+
 // Начальные параметры игры
 let birdX = 25; // Координата X птички
 let birdY = 150; // Координата Y птички
