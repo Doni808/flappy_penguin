@@ -32,6 +32,52 @@ let pipeWidth = 40;
 let pipeGap = 140;
 let pipeSpeed = 1.8;
 
+let lastFrameTime = 0; // Время последнего кадра
+const frameInterval = 1000 / 60; // Интервал между кадрами (16.67 мс для 60 FPS)
+
+function draw(timestamp) {
+  const deltaTime = timestamp - lastFrameTime;
+
+  // Обновляем только если прошло достаточно времени
+  if (deltaTime >= frameInterval) {
+    lastFrameTime = timestamp;
+
+    // Очищаем холст
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Отрисовываем трубы
+    drawPipes();
+
+    // Рисуем птичку
+    drawBird();
+
+    // Отображаем счёт
+    drawScore();
+
+    // Применяем гравитацию
+    velocity += gravity;
+    birdY += velocity;
+
+    // Проверка столкновений
+    if (birdY + birdHeight > canvas.height || birdY < 0) {
+      isGameOver = true;
+    }
+  }
+
+  // Проверяем состояние игры
+  if (!isGameOver) {
+    requestAnimationFrame(draw);
+  } else {
+    // Отрисовываем экран окончания игры
+    ctx.fillStyle = "black";
+    ctx.font = "30px Arial";
+    ctx.fillText("Игра окончена!", 50, canvas.height / 2);
+    ctx.font = "20px Arial";
+    ctx.fillText("Кликните, чтобы начать заново", 30, canvas.height / 2 + 40);
+  }
+}
+
+
 // Функция сброса игры
 function resetGame() {
   birdY = 150;
