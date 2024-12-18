@@ -111,12 +111,15 @@ function drawPipes() {
     // Двигаем трубу влево
     pipe.x -= pipeSpeed;
 
-    // Проверка столкновения
+    // Проверка столкновений с уменьшенным хитбоксом
+    const birdHitboxPadding = 5; // Отступы для уменьшения зоны столкновения
     if (
-      birdX + birdWidth > pipe.x && birdX < pipe.x + pipeWidth &&
-      (birdY < pipe.gapStart || birdY + birdHeight > pipe.gapStart + pipeGap)
+      birdX + birdHitboxPadding < pipe.x + pipeWidth &&
+      birdX + birdWidth - birdHitboxPadding > pipe.x &&
+      (birdY + birdHitboxPadding < pipe.gapStart ||
+       birdY + birdHeight - birdHitboxPadding > pipe.gapStart + pipeGap)
     ) {
-      isGameOver = true; // Столкновение с трубой
+      isGameOver = true; // Столкновение
     }
 
     // Если труба вышла за пределы экрана, добавляем новую
