@@ -29,7 +29,7 @@ let isGameOver = false; // Состояние игры
 // Параметры труб
 let pipes = [];
 let pipeWidth = 40;
-let pipeGap = 140;
+let pipeGap = 180;
 let pipeSpeed = 1.8;
 
 let lastFrameTime = 0; // Время последнего кадра
